@@ -50,6 +50,7 @@ public class AddStudentServlet extends HttpServlet {
           Date bod = dateFormat.parse(birthday);
           StudentEntity student = new StudentEntity(studentCode,name,bod,phone);
           studentDAO.createStudent(student);
+          resp.sendRedirect("/list-student");
       }catch (Exception ex){
           System.out.printf(ex.getMessage());
       }
