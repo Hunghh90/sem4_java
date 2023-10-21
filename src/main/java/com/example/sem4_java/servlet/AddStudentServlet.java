@@ -3,12 +3,13 @@ package com.example.sem4_java.servlet;
 import com.example.sem4_java.daos.StudentDAO;
 import com.example.sem4_java.daos.impl.StudentDAOImpl;
 import com.example.sem4_java.entities.StudentEntity;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -43,12 +44,11 @@ public class AddStudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try{
-          String studentCode = req.getParameter("studentCode");
           String name = req.getParameter("name");
           String birthday = req.getParameter("birthday");
           String phone = req.getParameter("phone");
           Date bod = dateFormat.parse(birthday);
-          StudentEntity student = new StudentEntity(studentCode,name,bod,phone);
+          StudentEntity student = new StudentEntity(name,bod,phone);
           studentDAO.createStudent(student);
           resp.sendRedirect("/list-student");
       }catch (Exception ex){

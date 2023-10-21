@@ -7,4 +7,8 @@ import java.util.List;
 public interface StudentDAO {
     void createStudent(StudentEntity student);
     List<StudentEntity> getAll();
+
+    void updateStudent(StudentEntity student);
+    void deleteStudent(int id);
+    StudentEntity getById(int id);
 }

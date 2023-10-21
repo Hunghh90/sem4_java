@@ -1,16 +1,16 @@
 package com.example.sem4_java.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "students")
-public class StudentEntity {
+public class StudentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="student_code")
-    private String studentCode;
+
     private String name;
     private Date birthday;
     private String phone;
@@ -19,9 +19,7 @@ public class StudentEntity {
         return id;
     }
 
-    public String getStudentCode() {
-        return studentCode;
-    }
+
 
     public String getName() {
         return name;
@@ -39,9 +37,6 @@ public class StudentEntity {
         this.id = id;
     }
 
-    public void setStudentCode(String studentCode) {
-        this.studentCode = studentCode;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -55,9 +50,8 @@ public class StudentEntity {
         this.phone = phone;
     }
 
-    public StudentEntity(Integer id, String studentCode, String name, Date birthday, String phone) {
+    public StudentEntity(Integer id, String name, Date birthday, String phone) {
         this.id = id;
-        this.studentCode = studentCode;
         this.name = name;
         this.birthday = birthday;
         this.phone = phone;
@@ -66,8 +60,7 @@ public class StudentEntity {
     public StudentEntity() {
     }
 
-    public StudentEntity(String studentCode, String name, Date birthday, String phone) {
-        this.studentCode = studentCode;
+    public StudentEntity( String name, Date birthday, String phone) {
         this.name = name;
         this.birthday = birthday;
         this.phone = phone;
