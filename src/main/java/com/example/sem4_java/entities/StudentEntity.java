@@ -12,6 +12,7 @@ public class StudentEntity implements Serializable {
     private Integer id;
 
     private String name;
+    @Temporal(TemporalType.DATE)
     private Date birthday;
     private String phone;
 

@@ -24,9 +24,17 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        int page = Integer.parseInt(req.getParameter("page"));
+        int pageSize = 2;
             List<StudentEntity> students = studentDAO.getAll();
-            req.setAttribute("students",students);
+        int startIndex = (page - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, students.size());
+
+        List<StudentEntity> currentPageItems = students.subList(startIndex, endIndex);
+
+        req.setAttribute("students", students);
+        req.setAttribute("currentPageItems", currentPageItems);
+
             req.getRequestDispatcher("/listStudent.jsp").forward(req, resp);
 
 
@@ -50,14 +58,14 @@ public class StudentServlet extends HttpServlet {
                         req.getParameter("phone")
                 );
                 studentDAO.updateStudent(st);
-                resp.sendRedirect("student-servlet");
+                resp.sendRedirect("student-servlet?page=1");
             }catch (Exception ex){
                 System.out.printf(ex.getMessage());
             }
         }
         if (req.getParameter("action").equals("delete")){
              studentDAO.deleteStudent(Integer.parseInt(req.getParameter("id")));
-            resp.sendRedirect("student-servlet");
+            resp.sendRedirect("student-servlet?page=1");
         }
     if (req.getParameter("action").equals("addStudent")){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -68,7 +76,7 @@ public class StudentServlet extends HttpServlet {
                     req.getParameter("phone")
             );
             studentDAO.createStudent(st);
-            resp.sendRedirect("student-servlet");
+            resp.sendRedirect("student-servlet?page=1");
         }catch (Exception ex){
             System.out.printf(ex.getMessage());
         }

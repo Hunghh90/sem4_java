@@ -21,6 +21,7 @@
     }
 </script>
 <jsp:useBean id="students" scope="request" type="java.util.List"/>
+<jsp:useBean id="currentPageItems" scope="request" type="java.util.List"/>
 <c:if test="${students.size()>0}">
 <table>
     <tr>
@@ -33,7 +34,8 @@
 
     <%
         List<StudentEntity> studentsList = (List<StudentEntity>) students;
-        for(StudentEntity student: studentsList) {
+        List<StudentEntity> currentItems = (List<StudentEntity>) currentPageItems;
+        for(StudentEntity student: currentItems) {
     %>
     <tr>
         <td><%=student.getName()%></td>
@@ -57,6 +59,19 @@
     </tr>
     <%}%>
 </table>
+    <% int currentPage = Integer.parseInt(request.getParameter("page"));
+        int totalItems = studentsList.size();
+        int totalPages = (int) Math.ceil((double) totalItems / 2); %>
+
+    <div>
+        <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>">Previous</a>
+        <% } %>
+
+        <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>">Next</a>
+        <% } %>
+    </div>
 </c:if>
 <c:if test="${students.size()<1}">
     <h3>Not Found</h3>

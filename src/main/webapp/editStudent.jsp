@@ -19,7 +19,7 @@
     <label for="name">Tên sinh viên:</label>
     <input type="text" id="name" name="name" value="<%=student.getName()%>" required><br>
     <label for="birthday">Ngày sinh:</label>
-    <input type="date" id="birthday" name="birthday" value="<%=student.getBirthday()%>" required><br>
+    <input type="date" id="birthday" name="birthday" value="${student.birthday}" required><br>
     <label for="phone">Số điện thoại:</label>
     <input type="text" id="phone" name="phone" value="<%=student.getPhone()%>" required><br>
     <input type="submit" value="Sửa">

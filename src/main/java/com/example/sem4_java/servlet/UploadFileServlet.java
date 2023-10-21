@@ -32,8 +32,9 @@ public class UploadFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part filePart = req.getPart("file");
-        String fileName = filePart.getSubmittedFileName();
+        String file = "";
         for (Part part : req.getParts()) {
+            String fileName = part.getSubmittedFileName();
             part.write("C:\\Users\\micro\\IdeaProjects\\sem4_java\\public\\upload\\image\\" + fileName);
         }
         resp.getWriter().print("uploaded sucess.");
